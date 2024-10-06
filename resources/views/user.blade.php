@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Data User</title>
+     <title>Data User</title>
     </head>
     <body>
         <h1>Data User</h1>

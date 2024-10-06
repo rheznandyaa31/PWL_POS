@@ -1,7 +1,7 @@
 <html>
 <head>
-     <title>Form Ubah Data User</title>
-    </head>
+ <title>Form Ubah Data User</title>
+     </head>
     <body>
         <h1>Form Ubah Data User</h1>
         <a href={{url('/user')}}>Kembali</a>

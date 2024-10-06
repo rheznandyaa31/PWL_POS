@@ -85,3 +85,4 @@ Route::group(['prefix' => 'barang'], function() {
     Route::put('/{id}', [BarangController::class, 'update']);                // Menyimpan perubahan data barang
 Route::delete('/{id}', [BarangController::class, 'destroy']);            // Menghapus data barang
 });
+
