@@ -83,5 +83,5 @@ Route::group(['prefix' => 'barang'], function() {
     Route::get('/{id}', [BarangController::class, 'show']);                  // Menampilkan detail barang
     Route::get('/{id}/edit', [BarangController::class, 'edit']);             // Menampilkan halaman form edit barang
     Route::put('/{id}', [BarangController::class, 'update']);                // Menyimpan perubahan data barang
-    Route::delete('/{id}', [BarangController::class, 'destroy']);            // Menghapus data barang
+Route::delete('/{id}', [BarangController::class, 'destroy']);            // Menghapus data barang
 });
