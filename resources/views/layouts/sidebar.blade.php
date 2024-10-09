@@ -27,7 +27,6 @@
       <li class="nav-header">Data Pengguna</li>
       <li class="nav-item">
         <a href="{{ url('/level') }}" class="nav-link {{ ($activeMenu == 'level')? 'active' : '' }}">
-          <i class="nav-icon fas fa-th"></i>
           <i class="nav-icon fas fa-layer-group"></i>
           <p>
             Level User
@@ -36,7 +35,6 @@
       </li>
       <li class="nav-item">
         <a href="{{ url('/user') }}" class="nav-link {{ ($activeMenu == 'user')? 'active' : '' }}">
-          <i class="nav-icon fas fa-th"></i>
           <i class="nav-icon far fa-user"></i>
           <p>
             Data User
@@ -46,7 +44,6 @@
       <li class="nav-header">Data Barang</li>
       <li class="nav-item">
         <a href="{{ url('/kategori') }}" class="nav-link {{ ($activeMenu == 'kategori')? 'active' : '' }}">
-          <i class="nav-icon fas fa-th"></i>
           <i class="nav-icon far fa-bookmark"></i>
           <p>
             Kategori Barang
@@ -55,43 +52,33 @@
       </li>
       <li class="nav-item">
         <a href="{{ url('/barang') }}" class="nav-link {{ ($activeMenu == 'barang')? 'active' : '' }}">
-          <i class="nav-icon fas fa-th"></i>
           <i class="nav-icon far fa-list-alt"></i>
           <p>
             Data Barang
           </p>
         </a>
       </li>
-      <li class="nav-header">Data Transaksi</li>
       <li class="nav-item">
-        <a href="{{ url('/stok') }}" class="nav-link {{ ($activeMenu == 'stok')? 'active' : '' }}">
         <a href="{{ url('/supplier') }}" class="nav-link {{ ($activeMenu == 'supplier')? 'active' : '' }}">
           <i class="nav-icon fas fa-th"></i>
           <p>
-            Stok Barang
             Supplier
           </p>
         </a>
       </li>
       <li class="nav-header">Data Transaksi</li>
       <li class="nav-item">
-        <a href="{{ url('/transaksi') }}" class="nav-link {{ ($activeMenu == 'penjualan')? 'active' : '' }}">
-          <i class="nav-icon fas fa-th"></i>
         <a href="{{ url('/stok') }}" class="nav-link {{ ($activeMenu == 'stok')? 'active' : '' }}">
           <i class="nav-icon fas fa-cubes"></i>
           <p>
-            Transaksi Penjualan
             Stok Barang
           </p>
         </a>
       </li>
       <li class="nav-item">
-        <a href="{{ url('/supplier') }}" class="nav-link {{ ($activeMenu == 'supplier')? 'active' : '' }}">
-          <i class="nav-icon fas fa-th"></i>
         <a href="{{ url('/transaksi') }}" class="nav-link {{ ($activeMenu == 'penjualan')? 'active' : '' }}">
           <i class="nav-icon fas fa-cash-register"></i>
           <p>
-            Supplier
             Transaksi Penjualan
           </p>
         </a>
@@ -99,3 +86,4 @@
     </ul>
   </nav>
   <!-- /.sidebar-menu -->
+</div>
