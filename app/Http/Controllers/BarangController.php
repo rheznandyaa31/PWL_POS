@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\LevelModel;
 use App\Models\BarangModel;
 use App\Models\KategoriModel;
