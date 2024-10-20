@@ -1,21 +1,20 @@
-<form action="{{ url('/kategori/ajax') }}" method="POST" id="form-tambah">
+<form action="{{ url('/kategori/ajax') }}" method="POST" id="form-tambah-kategori">
     @csrf
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Tambah Data Kategori</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>Kategori Kode</label>
-                    <input value="" type="text" name="kategori_kode" id="kategori_kode" class="form-control" required>
+                    <label>Kode Kategori</label>
+                    <input type="text" name="kategori_kode" id="kategori_kode" class="form-control" required>
                     <small id="error-kategori_kode" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
-                    <label>Kategori Nama</label>
-                    <input value="" type="text" name="kategori_nama" id="kategori_nama" class="form-control" required>
+                    <label>Nama Kategori</label>
+                    <input type="text" name="kategori_nama" id="kategori_nama" class="form-control" required>
                     <small id="error-kategori_nama" class="error-text form-text text-danger"></small>
                 </div>
             </div>
@@ -26,20 +25,13 @@
         </div>
     </div>
 </form>
+
 <script>
     $(document).ready(function() {
-        $("#form-tambah").validate({
+        $("#form-tambah-kategori").validate({
             rules: {
-                kategori_kode: {
-                    required: true,
-                    minlength: 3,
-                    maxlength: 10
-                },
-                kategori_nama: {
-                    required: true,
-                    minlength: 3,
-                    maxlength: 100
-                },
+                kategori_kode: { required: true, minlength: 2, maxlength: 50 },
+                kategori_nama: { required: true, minlength: 3, maxlength: 100 }
             },
             submitHandler: function(form) {
                 $.ajax({
@@ -47,14 +39,14 @@
                     type: form.method,
                     data: $(form).serialize(),
                     success: function(response) {
-                        if (response.status) {
+                        if(response.status){
                             $('#myModal').modal('hide');
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Berhasil',
                                 text: response.message
                             });
-                            dataKategori.ajax.reload();
+                            dataKategori.ajax.reload(); // reload the datatable
                         } else {
                             $('.error-text').text('');
                             $.each(response.msgField, function(prefix, val) {
@@ -71,14 +63,14 @@
                 return false;
             },
             errorElement: 'span',
-            errorPlacement: function(error, element) {
+            errorPlacement: function (error, element) {
                 error.addClass('invalid-feedback');
                 element.closest('.form-group').append(error);
             },
-            highlight: function(element, errorClass, validClass) {
+            highlight: function (element, errorClass, validClass) {
                 $(element).addClass('is-invalid');
             },
-            unhighlight: function(element, errorClass, validClass) {
+            unhighlight: function (element, errorClass, validClass) {
                 $(element).removeClass('is-invalid');
             }
         });

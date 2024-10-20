@@ -5,91 +5,86 @@
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
-                <a href="{{ url('supplier/create') }}" class="btn btn-sm btn-primary mt-1">Tambah</a>
+                <a href="{{ url('/supplier/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i>Export Supplier</a>
                 <button onclick="modalAction('{{ url('/supplier/create_ajax') }}')" class="btn btn-sm btn-success mt-1">Tambah Ajax</button>
             </div>
         </div>
         <div class="card-body">
             @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
+                <div class="alert alert-success">{{ session('success') }}</div>
             @endif
             @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('errror') }}
-                </div>
+                <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-            <table class="table table-bordered table-striped table-hover table-sm" id="table_supplier">
+            
+            <table class="table table-bordered table-striped table-hover table-sm" id="table-supplier">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Supplier kode</th>
-                        <th>Supplier Nama</th>
-                        <th>Supplier Alamat</th>
+                        <th>Kode Supplier</th>
+                        <th>Nama Supplier</th>
+                        <th>Alamat Supplier</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
             </table>
         </div>
     </div>
-    <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" data-width="75%" aria-hidden="true"></div>
+    <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" data-width="75%" aria-hidden="true"></div> 
 @endsection
 
 @push('css')
 @endpush
 
-@push('js')
-    <script>
-        function modalAction(url = '') {
-            $('#myModal').load(url, function() {
-                $('#myModal').modal('show');
-            });
+@push('js') 
+    <script> 
+        function modalAction(url = ''){ 
+            $('#myModal').load(url,function(){ 
+                $('#myModal').modal('show'); 
+            }); 
         }
-        var dataSupplier
-        $(document).ready(function() {
-            var dataSupplier = $('#table_supplier').DataTable({
-            dataSupplier = $('#table_supplier').DataTable({
-                // serverSide: true, jika ingin menggunakan server side processing
+        var dataSupplier;
+        $(document).ready(function() { 
+            dataSupplier = $('#table-supplier').DataTable({
                 serverSide: true,
-                ajax: {
-                    "url": "{{ url('supplier/list') }}",
-                    "dataType" : "json",
-                    "type": "POST",
-                },
-                columns: [
+                ajax: { 
+                    "url": "{{ url('supplier/list') }}", 
+                    "type": "POST", 
+                    "dataType": "json"
+                }, 
+                columns: [ 
                     {
-                        // nomor urut dari laravel datatable addIndexColumn()
-                        data: "DT_RowIndex",
-                        ClassName: "text-center",
-                        orderable: false,
-                        searchable: false
-                    },{
-                        data: "supplier_kode",
-                        ClassName: "",
-                        // orderable: true, jika ingin kolom ini bisa diurutkan
-                        orderable: true,
-                        // searchable: true, jika ingin kolom ini bisa dicari
-                        searchable: true
-                    },{
-                        // mengambil data supplier hasil dari ORM berelasi
-                        data: "supplier_nama",
-                        ClassName: "",
-                        orderable: true,
-                        searchable: true
-                    },{
-                        // mengambil data supplier hasil dari ORM berelasi
-                        data: "supplier_alamat",
-                        ClassName: "",
-                        orderable: true,
-                        searchable: true
-                    },{
-                        data: "aksi",
-                        ClassName: "",
-                        orderable: false,
-                        searchable: false
-                    }
-                ]
-            });
-        });
-    </script>
+                        data: "DT_RowIndex",             
+                        className: "text-center", 
+                        orderable: false, 
+                        searchable: false     
+                    },
+                    { 
+                        data: "supplier_kode",                
+                        className: "", 
+                        orderable: true,     
+                        searchable: true     
+                    },
+                    { 
+                        data: "supplier_nama",                
+                        className: "", 
+                        orderable: true,     
+                        searchable: true     
+                    },
+                    { 
+                        data: "supplier_alamat",                
+                        className: "", 
+                        orderable: true,     
+                        searchable: true     
+                    },
+                    { 
+                        data: "aksi",                
+                        className: "", 
+                        orderable: false,     
+                        searchable: false     
+                    } 
+                ] 
+            }); 
+        }); 
+    </script> 
+@endpush

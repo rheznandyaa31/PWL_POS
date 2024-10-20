@@ -11,27 +11,15 @@ class AuthorizeUser
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  mixed  ...$roles
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, ...$roles): Response
+    public function handle(Request $request, Closure $next, ... $roles): Response
     {
-        $user = $request->user(); // Get the authenticated user
-
-        if (!$user) {
-            abort(403, 'Unauthorized. Kamu perlu login untuk mengakses halaman ini.');
+        $user_role = $request->user()->getRole();   //ambil data level_kode dari user yang login
+        if(in_array($user_role, $roles)){   //cek apakah level_kode ada di dalam array roles
+            return $next($request); //jika ada, maka lanjutkan request
         }
-
-        $user_role = $user->getRole(); // Get the user's role
-
-        // Check if the user's role is in the allowed roles
-        if (in_array($user_role, $roles)) {
-            return $next($request); // Continue the request if authorized
-        }
-
-        // If the user doesn't have a valid role, show a 403 error
+        // jika tidak punya role, maka tampilkan error 403
         abort(403, 'Forbidden. Kamu tidak punya akses ke halaman ini');
-    }
+    }      
 }
