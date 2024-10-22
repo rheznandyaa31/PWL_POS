@@ -61,6 +61,7 @@ class ProfilController extends Controller
             'agama' => 'required|string|max:50',
             'no_hp' => 'required|string|max:15',
             'alamat' => 'required|string|max:255',
+            
         ];
 
         // Jalankan validasi
@@ -121,7 +122,7 @@ class ProfilController extends Controller
 
         // Cek apakah password lama sesuai dengan password user yang sedang login
         $currentPassword = Auth::user()->password;
-     if (!Hash::check($request->old_password, $currentPassword)) {
+        if (!Hash::check($request->old_password, $currentPassword)) {
             return redirect()->back()->withErrors(['old_password' => 'Password lama tidak sesuai']);
         }
 

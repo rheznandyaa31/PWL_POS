@@ -11,7 +11,7 @@ class ProfilUserModel extends Model
 
     // Tentukan nama tabel jika berbeda dari default
     protected $table = 'profil_user';
-    protected $primaryKey = 'profil_id';
+    protected $primaryKey = 'user_id';
 
     // Tentukan kolom yang boleh diisi (fillable)
     protected $fillable = [

@@ -14,10 +14,10 @@ class FillMissingUserProfilesSeeder extends Seeder
         $users = UserModel::doesntHave('profil')->get();
 
         foreach ($users as $user) {
-            // Membuat profil untuk user yang belum memiliki profil
+            // Membuat record profil untuk user yang belum memiliki profil
             ProfilUserModel::create([
-                'user_id' => $user->id, // Pastikan primary key yang benar, biasanya 'id'
-                'tempat_lahir' => null, // Nilai null bisa di-skip jika kolom di DB nullable
+                'user_id' => $user->user_id,
+                'tempat_lahir' => null,
                 'tanggal_lahir' => null,
                 'jenis_kelamin' => null,
                 'agama' => null,
