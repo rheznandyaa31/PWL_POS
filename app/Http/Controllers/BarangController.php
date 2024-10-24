@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\LevelModel;
 use Illuminate\Http\Request;
@@ -51,6 +53,8 @@ class BarangController extends Controller
             ->rawColumns(['aksi'])
             ->make(true);
     }
+
+
     public function create()
     {
         $breadcrumb = (object) [
@@ -170,6 +174,15 @@ class BarangController extends Controller
     {
         $kategori = KategoriModel::select('kategori_id', 'kategori_nama')->get();
         return view('barang.create_ajax')->with('kategori', $kategori);
+    }
+    public function show_ajax(Request $request, string $id)
+    {
+        $barang = BarangModel::find($id);
+
+        if (!$barang) {
+            return response()->json(['status' => false, 'message' => 'barang not found'], 404);
+        }
+        return view('barang.show_ajax', compact('barang'));
     }
 
     // Store a newly created item via AJAX
@@ -389,7 +402,7 @@ class BarangController extends Controller
         //end function export_excel
     }
     public function export_pdf()
-   {
+    {
         $barang = BarangModel::select('kategori_id', 'barang_kode', 'barang_nama', 'harga_beli', 'harga_jual')
             ->orderBy('kategori_id')
             ->orderBy('barang_kode')
