@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LevelController;
