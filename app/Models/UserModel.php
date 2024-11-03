@@ -3,47 +3,26 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
 
 class UserModel extends Authenticatable
 {
     use HasFactory;
 
-    protected $table = 'm_user'; //Mendefinisikan nama tabel yang digunakan oleh model ini
-    protected $primaryKey = 'user_id'; //Mendefiniskan primary key dari tabel yang digunakan
-    protected $fillable = ['username', 'password', 'nama', 'level_id', 'avatar', 'created_at', 'updated_at'];
-    protected $hidden = ['password'];
-    protected $casts =  ['password' => 'hashed'];
+    protected $table = 'm_user';
+    protected $primaryKey = 'user_id';
 
-    public function level(): BelongsTo
-    {
-        return $this->belongsTo(LevelModel::class, 'level_id', 'level_id');
-    }
+    // Tentukan kolom yang bisa diisi secara massal
+    protected $fillable = [
+        'username',
+        'nama',
+        'password',
+        'level_id',
+        'avatar',
+    ];
 
-    public function profil(): HasOne
-    {
-        return $this->hasOne(ProfilUserModel::class, 'user_id', 'user_id');
-    }
-    public function stok(): HasMany
-    {
-        return $this->hasMany(StokModel::class, 'user_id', 'user_id');
-    }
-
-    public function getRoleName(): string
-    {
-        return $this->level->level_nama;
-    }
-    public function hasRole($role): bool
-    {
-        return $this->level->level_kode == $role;
-    }
-    public function getRole()
-    {
-        return $this->level->level_kode;
-    }
+    // Menyembunyikan kolom password agar tidak ditampilkan di JSON output
+    protected $hidden = [
+        'password',
+    ];
 }
